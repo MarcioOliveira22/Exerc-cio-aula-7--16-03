@@ -1,14 +1,9 @@
-tarefas = [] # Histórico de Alterações
-- Corrigido erro de maiúscula na variável tarefas.
-- Adicionado menu de navegação.
-- Implementada confirmação de exclusão.
-
+tarefas = []
 sair = False
 
 while not sair:
-    # Exibe o menu com a contagem de tarefas
     print(f"\n=== TASK MANAGER ({len(tarefas)} tarefas) ===")
-    print("1-Criar 2-Listar 3-Deletar 4-Sair")
+    print("1-Criar 2-Listar 3-Deletar 4-Sair 5-Buscar 6-Editar")
     
     opcao = input("Opção: ")
 
@@ -29,29 +24,38 @@ while not sair:
                 print(f"{i}. {t}")
 
     elif opcao == "3":
-        # Implementação com confirmação 
         try:
-            indice = input("Qual número da tarefa deseja deletar? ")
-            idx = int(indice) - 1
-            
+            idx = int(input("Qual número deseja deletar? ")) - 1
             if 0 <= idx < len(tarefas):
-                confirmar = input(f"Tem certeza que deseja deletar '{tarefas[idx]}'? (s/n): ")
+                confirmar = input(f"Deletar '{tarefas[idx]}'? (s/n): ")
                 if confirmar.lower() == 's':
-                    deletada = tarefas.pop(idx)
-                    print(f"✔ '{deletada}' removida com sucesso!")
-                else:
-                    print("Ação cancelada.")
+                    tarefas.pop(idx)
+                    print("✔ Removida!")
             else:
                 print("X Índice inválido!")
         except ValueError:
-            print("X Por favor, digite um número válido.")
+            print("X Digite um número.")
 
     elif opcao == "4":
-        # Confirmação de saída
-        confirmacao = input("Tem certeza que deseja sair? (s/n): ")
-        if confirmacao.lower() == "s":
+        if input("Sair? (s/n): ").lower() == "s":
             sair = True
             print("Até logo!")
+
+    elif opcao == "5":
+        termo = input("Buscar: ").lower()
+        encontradas = [t for t in tarefas if termo in t.lower()]
+        print(f"\n--- Resultados para '{termo}' ---")
+        for t in encontradas: print(f"🔍 {t}")
+        if not encontradas: print("Nada encontrado.")
+
+    elif opcao == "6":
+        try:
+            idx = int(input("Número para editar: ")) - 1
+            if 0 <= idx < len(tarefas):
+                tarefas[idx] = input(f"Novo nome para '{tarefas[idx]}': ")
+                print("✔ Editada!")
+        except ValueError:
+            print("X Digite um número.")
     
     else:
         print("X Opção inválida!")
