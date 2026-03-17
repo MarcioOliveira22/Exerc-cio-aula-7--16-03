@@ -27,17 +27,17 @@ while not sair:
         try:
             idx = int(input("Qual número deseja deletar? ")) - 1
             if 0 <= idx < len(tarefas):
-                confirmar = input(f"Deletar '{tarefas[idx]}'? (s/n): ")
-                if confirmar.lower() == 's':
+                confirmar = input(f"Deletar '{tarefas[idx]}'? (sim/não): ")
+                if confirmar.lower() == 'sim':
                     tarefas.pop(idx)
-                    print("✔ Removida!")
+                    print(" Removida!")
             else:
                 print("X Índice inválido!")
         except ValueError:
-            print("X Digite um número.")
+            print(" Digite um número.")
 
     elif opcao == "4":
-        if input("Sair? (s/n): ").lower() == "s":
+        if input("Sair? (s/n): ").lower() == "sim":
             sair = True
             print("Até logo!")
 
@@ -53,10 +53,10 @@ while not sair:
             idx = int(input("Número para editar: ")) - 1
             if 0 <= idx < len(tarefas):
                 tarefas[idx] = input(f"Novo nome para '{tarefas[idx]}': ")
-                print("✔ Editada!")
+                print(" Editada!")
         except ValueError:
-            print("X Digite um número.")
+            print(" Digite um número.")
     
     else:
-        print("X Opção inválida!")
+        print(" Opção inválida!")
 
